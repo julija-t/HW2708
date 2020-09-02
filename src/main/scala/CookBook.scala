@@ -7,7 +7,7 @@ import java.io.FileWriter
 object CookBook extends App {
   val workingDir = System.getProperty("user.dir")
   val srcName = if(args.nonEmpty) args(0) else s"$workingDir\\resources\\13177-8.txt"
-  val dstName = s"$workingDir\\results\\13177-8-results.txt"
+  val dstName = s"$workingDir\\13177-8-results.txt"
 
   /** Reads a text file from program arguments or a default source, if arguments are empty */
   def openSource(fName: String): Seq[String] = {
