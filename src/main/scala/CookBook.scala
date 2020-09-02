@@ -7,13 +7,14 @@ import java.io.FileWriter
 object CookBook extends App {
   val workingDir = System.getProperty("user.dir")
   val srcName = if(args.nonEmpty) args(0) else s"$workingDir\\resources\\13177-8.txt"
-  val dstName = s"$workingDir\\13177-8-results.txt"
+  val dstName = s"$workingDir\\resources\\13177-8-results.txt"
 
   /** Reads a text file from program arguments or a default source, if arguments are empty */
   def openSource(fName: String): Seq[String] = {
-      println(s"Reading a file from source: $srcName")
-      val filePointer = scala.io.Source.fromFile(srcName)
-      val myLines = filePointer.getLines.toSeq
+      println(s"Reading a file from source: $fName")
+      val filePointer = scala.io.Source.fromFile(fName)
+      val myLines = filePointer.getLines.toList
+      filePointer.close()
 
       myLines
   }
@@ -32,10 +33,6 @@ object CookBook extends App {
 
     //adds an empty line before and after the Recipe Name and different Ingredient parts (ex.: 1st BATCH, 2nd BATCH)
     val processedSeq = tempList3.toList.map(el => if (el.trim.charAt(1).isUpper || el.trim.last.isUpper) "\n" + el + "\n"  else el)
-
-    println(s"Closing the file $srcName")
-    //closes the file
-    scala.io.Source.fromFile(srcName).close()
 
     processedSeq
   }
